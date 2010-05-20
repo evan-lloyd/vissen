@@ -58,7 +58,7 @@ node DRD4_polymorphism
 node response_inhibition
 {
 	states = ("F" "T" );
-	position = (220 -190);
+	position = (175 -180);
 	excludepolicy = "include whole CPT";
 	ismapvariable = "false";
 	label = "response.inhibition";
@@ -108,7 +108,7 @@ node phasic_dopamine
 node bipolar
 {
 	states = ("F" "T" );
-	position = (239 -302);
+	position = (239 -330);
 	excludepolicy = "include whole CPT";
 	ismapvariable = "false";
 	label = "bipolar";
