@@ -1,5 +1,6 @@
 import java.util.*;
 import java.awt.event.*;
+import java.awt.*;
 
 BeliefNetwork net = null;
 EvidenceController evidence = null;
@@ -7,12 +8,17 @@ InferenceEngine engine = null;
 HuginNode graphNodes[] = null;
 Node nodes[] = null;
 
+double sens[][][];
+
 boolean leftMBHeld, rightMBHeld, centerMBHeld;
 int lxPress, lyPress, rxPress, ryPress, cxPress, cyPress; // location of mouse at button press event
 int prevMouseX, prevMouseY;
 int nodeDragged = -1;
+int nodeAsserting = -1;
 public float panX = 0, panY = 0;
 public float zoom = 1.0;
+
+public double minP, maxP;
 
 color bgColor;
 color nodeHighlightColor;
@@ -21,6 +27,16 @@ color nodeUnobservedColor;
 color nodeTrueColor;
 color nodeFalseColor;
 public PFont nodeFont;
+
+int nPapers = 84065;
+double curP = 1.0;
+public String statusString = "";
+public color statusBackground;
+
+void updateP() {
+  curP = engine.probability();
+  statusString = "Number of papers matching current filters: " + Integer.toString((int)(curP * nPapers + 0.5)) + " / " + Integer.toString(nPapers);
+}
 
 void initNetwork() {
   net = loadNetwork("pubmedquery.net");
@@ -32,14 +48,42 @@ void initNetwork() {
   Object v[] = net.vertices().toArray();
   graphNodes = new HuginNode[net.vertices().size()];
   nodes = new Node[net.vertices().size()];
+  
+  Point pt = new Point();
+
+  float minX = Float.MAX_VALUE, maxX = -Float.MAX_VALUE;
+  float minY = Float.MAX_VALUE, maxY = -Float.MAX_VALUE;
+  
+  sens = new double[nodes.length][][];
 
   for(int i = 0; i < nodes.length; i++) {
     graphNodes[i] = (HuginNode)v[i];
     nodes[i] = new Node();
-    nodes[i].nodePosition[0] = random(60, 940);
-    nodes[i].nodePosition[1] = random(60, 940);
+    nodes[i].nodePosition[0] = graphNodes[i].getLocation(pt).x;
+    nodes[i].nodePosition[1] = graphNodes[i].getLocation(pt).y;
     nodes[i].nodeLabel = graphNodes[i].getLabel();
+    
+    minX = min(minX, graphNodes[i].getLocation(pt).x);
+    minY = min(minY, graphNodes[i].getLocation(pt).y);
+    maxX = max(maxX, graphNodes[i].getLocation(pt).x);
+    maxY = max(maxY, graphNodes[i].getLocation(pt).y);
+    
+    sens[i] = new double[nodes.length][];
+    for(int j = 0; j < nodes.length; j++)
+      sens[i][j] = new double[2];
   }
+  
+  minP = Double.MAX_VALUE;
+  maxP = -Double.MAX_VALUE;
+  for(int i = 0; i < nodes.length; i++) {
+    double p = Prob.logOdds(engine.conditional(graphNodes[i]).getCP(1));
+
+    minP = Math.min(minP, p);
+    maxP = Math.max(maxP, p);
+  }
+  
+  panX = (maxX - minX - width) / 2;
+  panY = (maxY + minY - height) / 2;
 
   rescaleNodes();
 }
@@ -49,29 +93,49 @@ void animateAssertion() {
 }
 
 void rescaleNodes() {
-  // find min and max marginals to set scale of nodes
-  double minP = Double.MAX_VALUE, maxP = -Double.MAX_VALUE;
   for(int i = 0; i < nodes.length; i++) {
     if(nodes[i].asserted != -1)
       continue;
     double p = Prob.logOdds(engine.conditional(graphNodes[i]).getCP(1));
-    nodes[i].p = p;
-
-    if(Double.isInfinite(p))
-    {
-      print("hey not a number\n");
-      continue;
-    }
-
-    if(p < minP)
-      minP = p;
-    if(p > maxP)
-      maxP = p;
+    nodes[i].setP(p);
   }
 
   for(int i = 0; i < nodes.length; i++) {
-    nodes[i].setScale(nodes[i].p, minP, maxP);
+    if(nodes[i].asserted == -1)
+      nodes[i].setScale(nodes[i].p, minP, maxP);
   }
+  
+  /*for(int i = 0; i < nodes.length; i++) {
+    for(int j = 0; j < nodes.length; j++) {
+      if(i == j)
+        continue;
+        
+      Object oldValue = evidence.getValue(graphNodes[n]);
+      try {
+        if(value == -1)
+          evidence.unobserve(graphNodes[n]);
+        else if(value == 0)
+          evidence.observe(graphNodes[n], "F");
+        else if(value == 1)
+          evidence.observe(graphNodes[n], "T");
+          
+        for(int i = 0; i < nodes.length; i++) {
+          if(nodes[i].asserted == -1 && i != nodeAsserting)
+            nodes[i].previewNewP(Prob.logOdds(engine.conditional(graphNodes[i]).getCP(1)));
+        }
+        
+        if(oldValue == null) {
+          evidence.unobserve(graphNodes[n]);
+        }
+        else
+          evidence.observe(graphNodes[n], oldValue);
+      }
+      catch (StateNotFoundException e) {
+      }
+    }
+  }*/
+
+  updateP();
 }
 
 void setup() {
@@ -91,6 +155,7 @@ void setup() {
   nodeFalseColor = color(13.0 / 360, .99, .52);
   bgColor = color(0.4);
   nodeFont = loadFont("nodeLabel.vlw");
+  statusBackground = color(254.0/360.0, .98, .72);
 
   // thanks to example code from Processing forums, by Guillaume LaBelle
   // http://ingallian.design.uqam.ca/goo/P55/ImageExplorer/
@@ -99,8 +164,8 @@ void setup() {
       int notches = evt.getWheelRotation();
       if(notches!=0){
         //println(notches);
-        float oldCenterX = (-panX + width / 2) * zoom;
-        float oldCenterY = (-panY + height / 2) * zoom;
+        float oldCenterX = panX + width / (2 * zoom);
+        float oldCenterY = panY + height / (2 * zoom);
 
         zoom *= (1.0 - 0.20 * notches);
         //zoomFactor+=notches*-0.05;
@@ -109,8 +174,8 @@ void setup() {
         if(zoom > 5.0)
           zoom = 5.0;
 
-        panX = -oldCenterX / zoom + width / 2;
-        panY = -oldCenterY / zoom + height / 2;
+        panX = oldCenterX - width / (2 * zoom);
+        panY = oldCenterY - height / (2 * zoom);
 
       }
     }
@@ -123,6 +188,60 @@ void draw() {
   for(int i = nodes.length - 1; i >= 0; i--) {
     nodes[i].draw();
   }
+  
+  stroke(nodeDefaultColor);
+  strokeWeight(2.0);
+  fill(statusBackground);
+  rect(5, height - 40, width - 10, 35);
+  
+  fill(nodeDefaultColor);
+  textFont(nodeFont, 24 * zoom);
+  textAlign(LEFT);
+  textSize(24);
+  text(statusString, 8, height - 14);
+}
+
+void assertEvidence(int n, int value) {
+  try {
+    if(value == -1)
+      evidence.unobserve(graphNodes[n]);
+    else if(value == 0)
+      evidence.observe(graphNodes[n], "F");
+    else if(value == 1)
+      evidence.observe(graphNodes[n], "T");
+  } 
+  catch (StateNotFoundException e) {
+  }
+  nodes[n].asserted = value;
+}
+
+void previewEvidence(int n, int value) {
+  Object oldValue = evidence.getValue(graphNodes[n]);
+  try {
+    if(value == -1)
+      evidence.unobserve(graphNodes[n]);
+    else if(value == 0)
+      evidence.observe(graphNodes[n], "F");
+    else if(value == 1)
+      evidence.observe(graphNodes[n], "T");
+      
+    for(int i = 0; i < nodes.length; i++) {
+      if(nodes[i].asserted == -1 && i != nodeAsserting)
+        nodes[i].previewNewP(Prob.logOdds(engine.conditional(graphNodes[i]).getCP(1)));
+    }
+    
+    if(oldValue == null) {
+      evidence.unobserve(graphNodes[n]);
+    }
+    else
+      evidence.observe(graphNodes[n], oldValue);
+  }
+  catch (StateNotFoundException e) {
+  }
+}
+
+void assertCurrentEvidence(int n) {
+  assertEvidence(nodeAsserting, nodes[nodeAsserting].asserted);
 }
 
 void mouseDragged() {
@@ -132,9 +251,19 @@ void mouseDragged() {
   if(centerMBHeld) { // pan view
     panX -= dx / zoom;
     panY -= dy / zoom;
+  }  
+  else if(nodeAsserting != -1) { // assert evidence
+    int value = -1;
+    if(mouseY - ryPress > 10)
+      value = 0;
+    else if(mouseY - ryPress < -10)
+      value = 1;
+    
+    nodes[nodeAsserting].asserted = value;
+    previewEvidence(nodeAsserting, value);
+    //animateAssertion();
   }
-
-  if(nodeDragged != -1) { // drag node
+  else if(nodeDragged != -1) { // drag node
     nodes[nodeDragged].nodePosition[0] += dx / zoom;
     nodes[nodeDragged].nodePosition[1] += dy / zoom;
   }
@@ -171,22 +300,12 @@ void mousePressed() {
   if(mouseButton == RIGHT) {
     for(int i = 0; i < nodes.length; i++) {
       if(nodes[i].pointInBounds(mouseX / zoom + panX, mouseY / zoom + panY)) {
-        int value = (nodes[i].asserted + 2) % 3 - 1;
-
-        try {
-          if(value == -1)
-            evidence.unobserve(graphNodes[i]);
-          else if(value == 0)
-            evidence.observe(graphNodes[i], "F");
-          else if(value == 1)
-            evidence.observe(graphNodes[i], "T");
-        } 
-        catch (StateNotFoundException e) {
-          print("oh noes state not found");
-        }
-
-        nodes[i].asserted = value;
-        animateAssertion();
+        nodeAsserting = i;
+        rxPress = mouseX;
+        ryPress = mouseY;
+        previewEvidence(i, -1);
+        nodes[i].asserted = -1;
+        //animateAssertion();
         break;
       }
     }  
@@ -202,8 +321,14 @@ void mouseReleased() {
     leftMBHeld = false;
     nodeDragged = -1;
   }
-  if(mouseButton == RIGHT)
+  if(mouseButton == RIGHT) {
     rightMBHeld = false;
+    if(nodeAsserting != -1) {
+      assertCurrentEvidence(nodeAsserting);
+      animateAssertion();
+      nodeAsserting = -1;
+    }
+  }
   if(mouseButton == CENTER)
     centerMBHeld = false;
 }

@@ -2,153 +2,66 @@ net
 {
 	rcenginegenerator1317510038576835557L = "edu.ucla.belief.inference.RCSettings@8518d4";
 	jenginegenerator6060830225489488864L = "edu.ucla.belief.inference.JoinTreeSettings@16f6a81";
+	node_size = (130 55);
 }
 
-node COMT
-{
-	states = ("F" "T" );
-	position = (554 -353);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "COMT";
-	diagnosistype = "AUXILIARY";
-}
-node prefrontal_cortex
-{
-	states = ("F" "T" );
-	position = (190 -322);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "prefrontal.cortex";
-	diagnosistype = "AUXILIARY";
-}
-node response_inhibition
-{
-	states = ("F" "T" );
-	position = (144 -205);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "response.inhibition";
-	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
-	diagnosistype = "AUXILIARY";
-}
-node cognitive_flexibility
-{
-	states = ("F" "T" );
-	position = (653 -192);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "cognitive.flexibility";
-	diagnosistype = "AUXILIARY";
-}
-node DRD4
-{
-	states = ("F" "T" );
-	position = (340 -624);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "DRD4";
-	diagnosistype = "AUXILIARY";
-}
 node subthalamic_nucleus
 {
 	states = ("F" "T" );
-	position = (229 -163);
+	position = (394 -196);
 	excludepolicy = "include whole CPT";
 	ismapvariable = "false";
 	label = "subthalamic.nucleus";
-	diagnosistype = "AUXILIARY";
-}
-node DRD4_transmission
-{
-	states = ("F" "T" );
-	position = (553 -476);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "DRD4.transmission";
-	diagnosistype = "AUXILIARY";
-}
-node dopamine_transporter
-{
-	states = ("F" "T" );
-	position = (56 -340);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "dopamine.transporter";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	diagnosistype = "AUXILIARY";
 }
-node latent_inhibition
+node COMT
 {
 	states = ("F" "T" );
-	position = (432 -146);
+	position = (681 -545);
 	excludepolicy = "include whole CPT";
 	ismapvariable = "false";
-	label = "latent.inhibition";
-	diagnosistype = "AUXILIARY";
-}
-node DRD4_polymorphism
-{
-	states = ("F" "T" );
-	position = (388 -443);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "DRD4.polymorphism";
-	diagnosistype = "AUXILIARY";
-}
-node bipolar
-{
-	states = ("F" "T" );
-	position = (282 -271);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "bipolar";
-	diagnosistype = "AUXILIARY";
-}
-node phasic_dopamine
-{
-	states = ("F" "T" );
-	position = (284 -454);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "phasic.dopamine";
-	diagnosistype = "AUXILIARY";
-}
-node affect_regulation
-{
-	states = ("F" "T" );
-	position = (439 -382);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "affect.regulation";
-	diagnosistype = "AUXILIARY";
-}
-node methamphetamine
-{
-	states = ("F" "T" );
-	position = (412 -257);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "methamphetamine";
+	label = "COMT";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
-	diagnosistype = "AUXILIARY";
-}
-node inattentive
-{
-	states = ("F" "T" );
-	position = (196 -483);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "inattentive";
 	diagnosistype = "AUXILIARY";
 }
 node impulsive
 {
 	states = ("F" "T" );
-	position = (13 -206);
+	position = (3 -139);
 	excludepolicy = "include whole CPT";
 	ismapvariable = "false";
 	label = "impulsive";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node affect_regulation
+{
+	states = ("F" "T" );
+	position = (383 -437);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "affect.regulation";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node DRD4_polymorphism
+{
+	states = ("F" "T" );
+	position = (438 -535);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "DRD4.polymorphism";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node response_inhibition
+{
+	states = ("F" "T" );
+	position = (220 -190);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "response.inhibition";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	diagnosistype = "AUXILIARY";
 }
@@ -162,33 +75,144 @@ node dopamine_receptor_1
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	diagnosistype = "AUXILIARY";
 }
-node Attention_deficit
-{
-	states = ("F" "T" );
-	position = (303 -38);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "Attention.deficit";
-	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
-	diagnosistype = "AUXILIARY";
-}
 node response_reversal
 {
 	states = ("F" "T" );
-	position = (548 -119);
+	position = (619 -27);
 	excludepolicy = "include whole CPT";
 	ismapvariable = "false";
 	label = "response.reversal";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	diagnosistype = "AUXILIARY";
 }
+node DRD4_transmission
+{
+	states = ("F" "T" );
+	position = (598 -635);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "DRD4.transmission";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node phasic_dopamine
+{
+	states = ("F" "T" );
+	position = (198 -544);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "phasic.dopamine";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node bipolar
+{
+	states = ("F" "T" );
+	position = (239 -302);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "bipolar";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node DRD4
+{
+	states = ("F" "T" );
+	position = (299 -638);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "DRD4";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node dopamine_transporter
+{
+	states = ("F" "T" );
+	position = (5 -299);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "dopamine.transporter";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node inattentive
+{
+	states = ("F" "T" );
+	position = (38 -591);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "inattentive";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node Attention_deficit
+{
+	states = ("F" "T" );
+	position = (353 -14);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "Attention.deficit";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node latent_inhibition
+{
+	states = ("F" "T" );
+	position = (515 -97);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "latent.inhibition";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node cognitive_flexibility
+{
+	states = ("F" "T" );
+	position = (653 -192);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "cognitive.flexibility";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node methamphetamine
+{
+	states = ("F" "T" );
+	position = (519 -324);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "methamphetamine";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node prefrontal_cortex
+{
+	states = ("F" "T" );
+	position = (127 -422);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "prefrontal.cortex";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+potential ( subthalamic_nucleus | dopamine_receptor_1 bipolar Attention_deficit )
+{
+	data = ((((	0.9972402368978888	0.002759763102111235	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))));
+}
 potential ( COMT | dopamine_receptor_1 response_reversal impulsive methamphetamine bipolar Attention_deficit )
 {
 	data = (((((((	0.8967369245705917	0.10326307542940828	)
 		(	0.999150743063397	8.49256936602974E-4	))
-		((	0.9986504255654508	0.0013495744345491053	)
-		(	0.9986772486355819	0.0013227513644179913	)))
-		(((	0.9984732824268704	0.0015267175731297708	)
+		((	0.9986504255654509	0.0013495744345491056	)
+		(	0.998677248635582	0.0013227513644179915	)))
+		(((	0.9984732824268702	0.0015267175731297703	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))
@@ -216,7 +240,7 @@ potential ( COMT | dopamine_receptor_1 response_reversal impulsive methamphetami
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))))
-		((((((	0.9995724669141512	4.275330858486548E-4	)
+		((((((	0.9995724669141514	4.2753308584865486E-4	)
 		(	1.0	0.0	))
 		((	0.9285714265571428	0.07142857344285719	)
 		(	1.0	0.0	)))
@@ -249,12 +273,88 @@ potential ( COMT | dopamine_receptor_1 response_reversal impulsive methamphetami
 		((	1.0	0.0	)
 		(	1.0	0.0	)))))));
 }
-potential ( prefrontal_cortex | dopamine_receptor_1 bipolar )
+potential ( impulsive | Attention_deficit )
 {
-	data = (((	0.9987987690372383	0.0012012309627618403	)
-		(	0.9999666410886293	3.3358911370717664E-5	))
+	data = ((	0.89240711	0.10759289	)
+		(	0.90828526	0.09171474	));
+}
+potential ( affect_regulation | dopamine_receptor_1 response_reversal impulsive methamphetamine bipolar Attention_deficit )
+{
+	data = (((((((	0.8557965119811511	0.14420348801884883	)
+		(	0.998544130954868	0.0014558690451319403	))
+		((	0.996297321918541	0.0037026780814589178	)
+		(	0.9669312164378306	0.033068783562169315	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
 		((	1.0	0.0	)
-		(	1.0	0.0	)));
+		(	1.0	0.0	))))
+		((((	0.9912150089209352	0.00878499107906492	)
+		(	0.9958432298752969	0.004156770124703104	))
+		((	0.9958333328625	0.0041666671375000155	)
+		(	0.9827586206379311	0.017241379362068966	)))
+		(((	0.9444444415555555	0.055555558444444576	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))))
+		(((((	0.9989154009989154	0.0010845990010845989	)
+		(	1.0	0.0	))
+		((	0.8571428631428569	0.1428571368571431	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))))
+		((((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))))
+		(((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))))));
+}
+potential ( DRD4_polymorphism | DRD4 dopamine_receptor_1 Attention_deficit )
+{
+	data = ((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	0.6894223696654157	0.31057763033458424	)
+		(	0.4729241943249097	0.5270758056750904	))
+		((	0.9942528741494253	0.005747125850574728	)
+		(	0.6666666779999996	0.3333333220000004	))));
 }
 potential ( response_inhibition | impulsive methamphetamine Attention_deficit )
 {
@@ -267,174 +367,18 @@ potential ( response_inhibition | impulsive methamphetamine Attention_deficit )
 		((	1.0	0.0	)
 		(	1.0	0.0	))));
 }
-potential ( cognitive_flexibility | dopamine_receptor_1 affect_regulation impulsive methamphetamine bipolar Attention_deficit )
+potential ( dopamine_receptor_1 | response_inhibition impulsive methamphetamine Attention_deficit )
 {
-	data = (((((((	0.8599202894229805	0.14007971057701957	)
-		(	0.9952658410049526	0.0047341589950473505	))
-		((	0.9989234990010766	0.0010765009989234992	)
-		(	0.9890859476739426	0.010914052326057322	)))
-		(((	0.9984746797309639	0.0015253202690359985	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	0.995654779788208	0.00434522021179203	)
-		(	0.9898749253407981	0.010125074659201911	))
-		((	0.9958158996016736	0.004184100398326359	)
+	data = (((((	0.7347543786921231	0.265245621307877	)
+		(	0.9980066830338864	0.001993316966113612	))
+		((	0.9870909605163616	0.01290903948363842	)
 		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))))
-		(((((	0.9971929825491229	0.0028070174508771947	)
-		(	1.0	0.0	))
-		((	0.9907407403231481	0.009259259676851867	)
-		(	0.96	0.04	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
+		(((	0.9998535441935267	1.4645580647334666E-4	)
+		(	0.9987980769277645	0.001201923072235577	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))
 		((((	1.0	0.0	)
 		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))))
-		((((((	0.9998574991001283	1.425008998717492E-4	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))))
-		(((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))))));
-}
-potential ( DRD4 | dopamine_receptor_1 response_reversal impulsive methamphetamine bipolar Attention_deficit )
-{
-	data = (((((((	0.8737332819137211	0.12626671808627896	)
-		(	0.9862905676496694	0.01370943235033062	))
-		((	0.9983389854242509	0.0016610145757491874	)
-		(	0.993386243112963	0.00661375688703705	)))
-		(((	0.9963358779809771	0.003664122019022903	)
-		(	0.9655172399724137	0.03448276002758627	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	0.9965753423544521	0.00342465764554795	)
-		(	0.9750593828389548	0.024940617161045134	))
-		((	0.9875	0.0125	)
-		(	0.9655172399724137	0.03448276002758627	)))
-		(((	1.0	0.0	)
-		(	0.6666666777999997	0.3333333222000004	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))))
-		(((((	0.9994577006996204	5.422993003796094E-4	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))))
-		((((((	0.9878153056305472	0.012184694369452758	)
-		(	0.7272727198545452	0.2727272801454548	))
-		((	0.9285714265571428	0.07142857344285719	)
-		(	1.0	0.0	)))
-		(((	0.9767441863255812	0.023255813674418608	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	0.0	1.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))))
-		(((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))))));
-}
-potential ( subthalamic_nucleus | dopamine_receptor_1 bipolar Attention_deficit )
-{
-	data = ((((	0.9972402368978888	0.002759763102111235	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))));
-}
-potential ( DRD4_transmission | DRD4 bipolar Attention_deficit )
-{
-	data = ((((	0.9986905279633348	0.001309472036665217	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	0.9353951897106528	0.06460481028934709	)
-		(	0.8136200772186379	0.18637992278136217	))
-		((	0.8461538389230766	0.15384616107692342	)
-		(	0.71428571	0.28571429000000004	))));
-}
-potential ( dopamine_transporter | dopamine_receptor_1 response_reversal impulsive Attention_deficit )
-{
-	data = (((((	0.9678761661243341	0.032123833875665815	)
-		(	0.9967573830551245	0.0032426169448755123	))
-		((	0.9995698925032258	4.3010749677419377E-4	)
-		(	0.9936962752569627	0.006303724743037253	)))
-		(((	1.0	0.0	)
-		(	0.9411764717647059	0.05882352823529416	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	0.9960258318728267	0.003974168127173381	)
-		(	0.8529411795294116	0.14705882047058833	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))
 		(((	1.0	0.0	)
@@ -442,51 +386,46 @@ potential ( dopamine_transporter | dopamine_receptor_1 response_reversal impulsi
 		((	1.0	0.0	)
 		(	1.0	0.0	)))));
 }
-potential ( latent_inhibition | dopamine_receptor_1 impulsive methamphetamine bipolar Attention_deficit )
+potential ( response_reversal | dopamine_receptor_1 impulsive methamphetamine Attention_deficit )
 {
-	data = ((((((	0.9465505439199453	0.05344945608005477	)
-		(	0.9997575758058667	2.424241941333345E-4	))
-		((	1.0	0.0	)
-		(	0.9986807387488126	0.0013192612511873365	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
+	data = (((((	0.9544279512287317	0.0455720487712683	)
+		(	0.9990149496496465	9.850503503534625E-4	))
+		((	0.999088976621318	9.11023378682053E-4	)
+		(	1.0	0.0	)))
+		(((	0.9975620249390507	0.002437975060949377	)
+		(	0.9988532109873853	0.0011467890126146793	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))
-		((((	0.9997029556131889	2.9704438681122926E-4	)
-		(	0.9994068802117436	5.931197882562281E-4	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))))
-		(((((	0.9998574991001283	1.425008998717492E-4	)
+		((((	0.9999288205585366	7.117944146344932E-5	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))
 		(((	1.0	0.0	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
-		(	1.0	0.0	))))
-		((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))))));
+		(	1.0	0.0	)))));
 }
-potential ( DRD4_polymorphism | DRD4 dopamine_receptor_1 Attention_deficit )
+potential ( DRD4_transmission | DRD4 bipolar Attention_deficit )
 {
-	data = ((((	1.0	0.0	)
+	data = ((((	0.9986905279633348	0.001309472036665217	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))
-		(((	0.6894223696654157	0.31057763033458424	)
-		(	0.4729241943249096	0.5270758056750903	))
-		((	0.9942528741494253	0.005747125850574728	)
-		(	0.6666666779999996	0.3333333220000004	))));
+		(((	0.9353951897106529	0.0646048102893471	)
+		(	0.8136200772186379	0.18637992278136217	))
+		((	0.8461538389230766	0.15384616107692342	)
+		(	0.71428571	0.28571429000000004	))));
+}
+potential ( phasic_dopamine | dopamine_receptor_1 bipolar Attention_deficit )
+{
+	data = ((((	0.9971022490574306	0.002897750942569346	)
+		(	0.9998902184979691	1.097815020309578E-4	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))));
 }
 potential ( bipolar | dopamine_receptor_1 dopamine_transporter response_reversal response_inhibition impulsive methamphetamine Attention_deficit )
 {
@@ -494,16 +433,16 @@ potential ( bipolar | dopamine_receptor_1 dopamine_transporter response_reversal
 		(	0.9555293401322322	0.044470659867767715	))
 		((	0.9953703701388888	0.004629629861111104	)
 		(	1.0	0.0	)))
-		(((	0.966084275847893	0.0339157241521069	)
+		(((	0.9660842758478931	0.033915724152106905	)
 		(	0.9660606057963637	0.03393939420363636	))
-		((	0.9473684198947367	0.05263158010526318	)
+		((	0.9473684198947369	0.052631580105263184	)
 		(	1.0	0.0	))))
 		((((	0.9879518069156626	0.012048193084337352	)
-		(	0.9913419910779222	0.008658008922077921	))
+		(	0.991341991077922	0.00865800892207792	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))
 		(((	0.9366197168591549	0.0633802831408451	)
-		(	0.9876543207407407	0.012345679259259263	))
+		(	0.9876543207407408	0.012345679259259265	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))))
 		(((((	0.9961368651352097	0.00386313486479028	)
@@ -619,38 +558,27 @@ potential ( bipolar | dopamine_receptor_1 dopamine_transporter response_reversal
 		((	1.0	0.0	)
 		(	1.0	0.0	))))))));
 }
-potential ( phasic_dopamine | dopamine_receptor_1 bipolar Attention_deficit )
+potential ( DRD4 | dopamine_receptor_1 response_reversal impulsive methamphetamine bipolar Attention_deficit )
 {
-	data = ((((	0.9971022490574306	0.002897750942569346	)
-		(	0.9998902184979691	1.097815020309578E-4	))
-		((	1.0	0.0	)
-		(	1.0	0.0	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
-		(	1.0	0.0	))));
-}
-potential ( affect_regulation | dopamine_receptor_1 response_reversal impulsive methamphetamine bipolar Attention_deficit )
-{
-	data = (((((((	0.8557965119811511	0.14420348801884883	)
-		(	0.998544130954868	0.0014558690451319403	))
-		((	0.996297321918541	0.0037026780814589178	)
-		(	0.9669312164378306	0.033068783562169315	)))
-		(((	1.0	0.0	)
-		(	1.0	0.0	))
+	data = (((((((	0.8737332819137211	0.12626671808627896	)
+		(	0.9862905676496694	0.01370943235033062	))
+		((	0.9983389854242507	0.001661014575749187	)
+		(	0.993386243112963	0.00661375688703705	)))
+		(((	0.9963358779809771	0.003664122019022903	)
+		(	0.9655172399724137	0.03448276002758627	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))
-		((((	0.9912150089209352	0.00878499107906492	)
-		(	0.9958432298752968	0.0041567701247031035	))
-		((	0.9958333328625	0.0041666671375000155	)
-		(	0.9827586206379311	0.017241379362068966	)))
-		(((	0.9444444415555555	0.055555558444444576	)
-		(	1.0	0.0	))
+		((((	0.9965753423544521	0.00342465764554795	)
+		(	0.9750593828389549	0.024940617161045137	))
+		((	0.9875	0.0125	)
+		(	0.9655172399724137	0.03448276002758627	)))
+		(((	1.0	0.0	)
+		(	0.6666666777999997	0.3333333222000004	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))))
-		(((((	0.9989154009989154	0.0010845990010845989	)
+		(((((	0.9994577006996204	5.422993003796094E-4	)
 		(	1.0	0.0	))
-		((	0.8571428631428569	0.1428571368571431	)
+		((	1.0	0.0	)
 		(	1.0	0.0	)))
 		(((	1.0	0.0	)
 		(	1.0	0.0	))
@@ -664,15 +592,15 @@ potential ( affect_regulation | dopamine_receptor_1 response_reversal impulsive 
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))))
-		((((((	1.0	0.0	)
-		(	1.0	0.0	))
-		((	1.0	0.0	)
+		((((((	0.9878153056305472	0.012184694369452758	)
+		(	0.7272727198545452	0.2727272801454548	))
+		((	0.9285714265571428	0.07142857344285719	)
 		(	1.0	0.0	)))
-		(((	1.0	0.0	)
+		(((	0.9767441863255814	0.02325581367441861	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))
-		((((	1.0	0.0	)
+		((((	0.0	1.0	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))
@@ -697,19 +625,31 @@ potential ( affect_regulation | dopamine_receptor_1 response_reversal impulsive 
 		((	1.0	0.0	)
 		(	1.0	0.0	)))))));
 }
-potential ( methamphetamine | impulsive Attention_deficit )
+potential ( dopamine_transporter | dopamine_receptor_1 response_reversal impulsive Attention_deficit )
 {
-	data = (((	0.9424847395843591	0.05751526041564094	)
-		(	0.9983257319464234	0.0016742680535765777	))
-		((	0.997282997008151	0.002717002991848991	)
-		(	0.9982847339416809	0.0017152660583190458	)));
+	data = (((((	0.9678761661243341	0.032123833875665815	)
+		(	0.9967573830551245	0.0032426169448755123	))
+		((	0.9995698925032258	4.3010749677419377E-4	)
+		(	0.9936962752569627	0.006303724743037253	)))
+		(((	1.0	0.0	)
+		(	0.9411764717647059	0.05882352823529416	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	0.9960258318728267	0.003974168127173381	)
+		(	0.8529411795294116	0.14705882047058833	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))));
 }
 potential ( inattentive | dopamine_receptor_1 response_reversal impulsive methamphetamine bipolar Attention_deficit )
 {
 	data = (((((((	0.8750507	0.1249493	)
-		(	0.9572338478616923	0.0427661521383076	))
-		((	0.9998269776038756	1.7302239612429832E-4	)
-		(	0.9814814803703703	0.018518519629629606	)))
+		(	0.9572338478616924	0.04276615213830761	))
+		((	0.9998269776038757	1.7302239612429835E-4	)
+		(	0.9814814803703704	0.01851851962962961	)))
 		(((	1.0	0.0	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
@@ -771,19 +711,34 @@ potential ( inattentive | dopamine_receptor_1 response_reversal impulsive metham
 		((	1.0	0.0	)
 		(	1.0	0.0	)))))));
 }
-potential ( impulsive | Attention_deficit )
+potential ( Attention_deficit | )
 {
-	data = ((	0.89240711	0.10759289	)
-		(	0.90828526	0.09171474	));
+	data = (	0.7731517	0.2268483	);
 }
-potential ( dopamine_receptor_1 | response_inhibition impulsive methamphetamine Attention_deficit )
+potential ( latent_inhibition | dopamine_receptor_1 impulsive methamphetamine bipolar Attention_deficit )
 {
-	data = (((((	0.7347543786921231	0.265245621307877	)
-		(	0.9980066830338864	0.001993316966113612	))
-		((	0.9870909605163615	0.012909039483638418	)
+	data = ((((((	0.9465505439199453	0.05344945608005477	)
+		(	0.9997575758058667	2.424241941333345E-4	))
+		((	1.0	0.0	)
+		(	0.9986807387488127	0.0013192612511873367	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	0.9997029556131887	2.970443868112292E-4	)
+		(	0.9994068802117437	5.931197882562282E-4	))
+		((	1.0	0.0	)
 		(	1.0	0.0	)))
-		(((	0.9998535441935267	1.4645580647334666E-4	)
-		(	0.9987980769277643	0.0012019230722355768	))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))))
+		(((((	0.9998574991001283	1.425008998717492E-4	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))
 		((((	1.0	0.0	)
@@ -793,28 +748,86 @@ potential ( dopamine_receptor_1 | response_inhibition impulsive methamphetamine 
 		(((	1.0	0.0	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
-		(	1.0	0.0	)))));
+		(	1.0	0.0	))))));
 }
-potential ( Attention_deficit | )
+potential ( cognitive_flexibility | dopamine_receptor_1 affect_regulation impulsive methamphetamine bipolar Attention_deficit )
 {
-	data = (	0.7731517	0.2268483	);
-}
-potential ( response_reversal | dopamine_receptor_1 impulsive methamphetamine Attention_deficit )
-{
-	data = (((((	0.9544279512287317	0.0455720487712683	)
-		(	0.9990149496496465	9.850503503534625E-4	))
-		((	0.999088976621318	9.11023378682053E-4	)
-		(	1.0	0.0	)))
-		(((	0.9975620249390507	0.002437975060949377	)
-		(	0.9988532109873853	0.0011467890126146793	))
+	data = (((((((	0.8599202894229805	0.14007971057701957	)
+		(	0.9952658410049526	0.0047341589950473505	))
+		((	0.9989234990010766	0.0010765009989234992	)
+		(	0.9890859476739426	0.010914052326057322	)))
+		(((	0.998474679730964	0.0015253202690359987	)
+		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	))))
-		((((	0.9999288205585366	7.117944146344932E-5	)
+		((((	0.995654779788208	0.00434522021179203	)
+		(	0.9898749253407981	0.010125074659201911	))
+		((	0.9958158996016736	0.004184100398326359	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))))
+		(((((	0.9971929825491227	0.0028070174508771943	)
+		(	1.0	0.0	))
+		((	0.9907407403231482	0.009259259676851869	)
+		(	0.96	0.04	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	1.0	0.0	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
 		(	1.0	0.0	)))
 		(((	1.0	0.0	)
 		(	1.0	0.0	))
 		((	1.0	0.0	)
-		(	1.0	0.0	)))));
+		(	1.0	0.0	))))))
+		((((((	0.9998574991001283	1.425008998717492E-4	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))))
+		(((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	))))
+		((((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))
+		(((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)))))));
+}
+potential ( methamphetamine | impulsive Attention_deficit )
+{
+	data = (((	0.9424847395843591	0.05751526041564094	)
+		(	0.9983257319464234	0.0016742680535765777	))
+		((	0.997282997008151	0.002717002991848991	)
+		(	0.9982847339416809	0.0017152660583190458	)));
+}
+potential ( prefrontal_cortex | dopamine_receptor_1 bipolar )
+{
+	data = (((	0.9987987690372381	0.00120123096276184	)
+		(	0.9999666410886293	3.3358911370717664E-5	))
+		((	1.0	0.0	)
+		(	1.0	0.0	)));
 }
