@@ -10,6 +10,7 @@ Node nodes[] = null;
 
 double sens[][][];
 
+boolean drawEdges = true;
 boolean leftMBHeld, rightMBHeld, centerMBHeld;
 int lxPress, lyPress, rxPress, ryPress, cxPress, cyPress; // location of mouse at button press event
 int prevMouseX, prevMouseY;
@@ -105,35 +106,33 @@ void rescaleNodes() {
       nodes[i].setScale(nodes[i].p, minP, maxP);
   }
   
-  /*for(int i = 0; i < nodes.length; i++) {
-    for(int j = 0; j < nodes.length; j++) {
-      if(i == j)
-        continue;
-        
-      Object oldValue = evidence.getValue(graphNodes[n]);
-      try {
-        if(value == -1)
-          evidence.unobserve(graphNodes[n]);
-        else if(value == 0)
-          evidence.observe(graphNodes[n], "F");
-        else if(value == 1)
-          evidence.observe(graphNodes[n], "T");
-          
-        for(int i = 0; i < nodes.length; i++) {
-          if(nodes[i].asserted == -1 && i != nodeAsserting)
-            nodes[i].previewNewP(Prob.logOdds(engine.conditional(graphNodes[i]).getCP(1)));
-        }
-        
-        if(oldValue == null) {
-          evidence.unobserve(graphNodes[n]);
-        }
-        else
-          evidence.observe(graphNodes[n], oldValue);
-      }
-      catch (StateNotFoundException e) {
-      }
+  for(int i = 0; i < nodes.length; i++) {
+    if(nodes[i].asserted != -1)
+      continue;
+    try {
+      evidence.observe(graphNodes[i], "F");
     }
-  }*/
+    catch (StateNotFoundException e) {}
+    
+    for(int j = 0; j < nodes.length; j++) {
+      if(i == j || nodes[j].asserted != -1)
+        continue;
+      sens[i][j][0] = Prob.logOdds(engine.conditional(graphNodes[j]).getCP(1)) - nodes[j].p;
+    }
+    
+    try {
+      evidence.observe(graphNodes[i], "T");
+    }
+    catch (StateNotFoundException e) {}
+    
+    for(int j = 0; j < nodes.length; j++) {
+      if(i == j || nodes[j].asserted != -1)
+        continue;
+      sens[i][j][1] = Prob.logOdds(engine.conditional(graphNodes[j]).getCP(1)) - nodes[j].p;
+    }
+
+    evidence.unobserve(graphNodes[i]);
+  }
 
   updateP();
 }
@@ -148,14 +147,14 @@ void setup() {
 
   colorMode(HSB, 1.0);
   frameRate(60);
-  nodeDefaultColor = color(1);
-  nodeHighlightColor = color(55.0 / 360.0, .96, .96);
-  nodeUnobservedColor = color(0);
-  nodeTrueColor = color(113.0 / 360, .99, .52);
-  nodeFalseColor = color(13.0 / 360, .99, .52);
-  bgColor = color(0.4);
+  nodeDefaultColor = color(0);
+  nodeHighlightColor = color(58.0 / 360.0, .8, .72);
+  nodeUnobservedColor = color(0.92);
+  nodeTrueColor = color(113.0 / 360, .49, .82);
+  nodeFalseColor = color(13.0 / 360, .49, .82);
+  bgColor = color(1.0);
   nodeFont = loadFont("nodeLabel.vlw");
-  statusBackground = color(254.0/360.0, .98, .72);
+  statusBackground = color(220.0/360.0, .48, 1.0);
 
   // thanks to example code from Processing forums, by Guillaume LaBelle
   // http://ingallian.design.uqam.ca/goo/P55/ImageExplorer/
@@ -185,6 +184,25 @@ void setup() {
 
 void draw() {
   background(bgColor);
+  
+  if(drawEdges) {
+    strokeWeight(6.0);
+    for(int i = 0; i < nodes.length; i++) {
+      for(int j = 0; j < nodes.length; j++) {
+        if(i == j)
+          continue;
+        if(sens[i][j][1] > 5) {
+          stroke(nodeTrueColor);
+          line(nodes[i].x(), nodes[i].y(), nodes[j].x(), nodes[j].y());
+        }
+        else if(sens[i][j][1] < -5) {
+          stroke(nodeFalseColor);
+          line(nodes[i].x(), nodes[i].y(), nodes[j].x(), nodes[j].y());
+        }
+      }
+    }
+  }
+  
   for(int i = nodes.length - 1; i >= 0; i--) {
     nodes[i].draw();
   }
@@ -331,5 +349,11 @@ void mouseReleased() {
   }
   if(mouseButton == CENTER)
     centerMBHeld = false;
+}
+
+void keyPressed() {
+  if(key == 'e') {
+    drawEdges = !drawEdges;
+  }
 }
 

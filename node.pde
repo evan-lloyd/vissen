@@ -72,12 +72,19 @@ class Node {
     else if(pval == Double.NEGATIVE_INFINITY)
       pString = "Impossible";
     else
-      pString = Double.toString(p);
+      pString = String.format("%.3f", pval);
     showDP = false;
   }
   
+  float x() { 
+    return (nodePosition[0] - panX) * zoom;
+  }
+  float y() {
+    return (nodePosition[1] - panY) * zoom;
+  }
+  
   void setScale(double val, double lower, double upper) {
-    final float s;
+    float s;
     
     if(val == Double.NEGATIVE_INFINITY || val == Double.NaN)
       s = 0.0f;
@@ -85,8 +92,9 @@ class Node {
       s = 1.0f;
     else
       s = (float)(val - lower) / (float)(upper - lower);
-    float minSize = 10, maxSize = 80;
-    nodeSize = minSize + s * (maxSize - minSize);
+    s = min(s, 1.0f);
+    s = max(s, 0.0f);
+    nodeSize = lerp(10, 80, s);
     radiusSq = nodeSize * nodeSize;
   }
   
