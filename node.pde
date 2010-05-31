@@ -5,6 +5,7 @@ class Node {
   float [] nodePosition = {0, 0};
   int asserted = -1;
   boolean highlight = false;
+  boolean selected = false;
   double p;
   double dp;
   boolean showDP = false;
@@ -21,6 +22,8 @@ class Node {
     
     if(highlight)
       stroke(nodeHighlightColor);
+    else if(selected)
+      stroke(nodeSelectedColor);
     else if(p == Double.POSITIVE_INFINITY)
       stroke(nodeTrueColor);
     else if(p == Double.NEGATIVE_INFINITY)
@@ -29,10 +32,12 @@ class Node {
       stroke(nodeDefaultColor);
     
     strokeWeight(3.0 * zoom);
-    ellipse((nodePosition[0] - panX) * zoom, (nodePosition[1] - panY) * zoom, nodeSize * zoom, nodeSize * zoom);
+    ellipse(x(), y(), nodeSize * zoom, nodeSize * zoom);
     
     if(highlight)
       fill(nodeHighlightColor);
+    else if(selected)
+      fill(nodeSelectedColor);
     else if(p == Double.POSITIVE_INFINITY)
       fill(nodeTrueColor);
     else if(p == Double.NEGATIVE_INFINITY)
@@ -43,19 +48,19 @@ class Node {
       
     textFont(nodeFont, 24 * zoom);
     textAlign(CENTER);
-    text(nodeLabel, (nodePosition[0] - panX) * zoom, (nodePosition[1] - panY - 8) * zoom);
-    text(pString, (nodePosition[0] - panX) * zoom, (nodePosition[1] - panY + 14) * zoom);
+    text(nodeLabel, x(), yOff(-8));
+    text(pString, x(), yOff(14));
     
     if(showDP) { // preview a change in p
         strokeWeight(10.0 * zoom);
         float lineLen = lerp(10, 50, (float)Math.abs(dp));
       if(dp > 0.01) {
         stroke(nodeTrueColor);
-        line((nodePosition[0] - panX) * zoom, (nodePosition[1] - panY) * zoom, (nodePosition[0] - panX) * zoom, (nodePosition[1] - panY - lineLen) * zoom);
+        line(x(), y(), x(), yOff(-lineLen));
       }
       else if(dp < -0.01) {
         stroke(nodeFalseColor);
-        line((nodePosition[0] - panX) * zoom, (nodePosition[1] - panY) * zoom, (nodePosition[0] - panX) * zoom, (nodePosition[1] - panY + lineLen) * zoom);
+        line(x(), y(), x(), yOff(lineLen));
       }
     }
   }
@@ -76,11 +81,19 @@ class Node {
     showDP = false;
   }
   
+  float xOff(float off) {
+    return worldToScreenX(nodePosition[0] + off);
+  }
+  
+  float yOff(float off) {
+    return worldToScreenY(nodePosition[1] + off);
+  }
+  
   float x() { 
-    return (nodePosition[0] - panX) * zoom;
+    return worldToScreenX(nodePosition[0]);
   }
   float y() {
-    return (nodePosition[1] - panY) * zoom;
+    return worldToScreenY(nodePosition[1]);
   }
   
   void setScale(double val, double lower, double upper) {
@@ -101,9 +114,9 @@ class Node {
   void update() {
   }
   
-  boolean pointInBounds(float x, float y) {
-    float dx = x - nodePosition[0];
-    float dy = y - nodePosition[1];
+  boolean pointInBounds(PVector p) {
+    float dx = p.x - nodePosition[0];
+    float dy = p.y - nodePosition[1];
     
     if((dx * dx + dy * dy) <= radiusSq)
       return true;

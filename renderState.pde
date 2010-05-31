@@ -1,11 +1,8 @@
-// Navigation
-public float panX = 0, panY = 0;
-public float zoom = 1.0;
-
 double minP, maxP;
 
 // Color and font styles
 color bgColor;
+color nodeSelectedColor;
 color nodeHighlightColor;
 color nodeDefaultColor;
 color nodeUnobservedColor;
@@ -14,9 +11,12 @@ color nodeFalseColor;
 color selectionBoxColor;
 color statusBackground;
 PFont nodeFont;
+PFont controlsSmall;
+PFont controlsLarge;
 
 // Rendering state
 boolean drawEdges = true;
+boolean dynamicLayout = false;
 public String statusString = "";
 int nPapers = 84065;
 double curP = 1.0;
