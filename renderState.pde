@@ -21,7 +21,3 @@ public String statusString = "";
 int nPapers = 84065;
 double curP = 1.0;
 Node nodes[] = null;
-
-float edgeThreshMin = 0.0;
-float edgeThreshMax = 20.0;
-float edgeThresh = 5.0;

@@ -5,6 +5,20 @@ EvidenceController evidence = null;
 InferenceEngine engine = null;
 HuginNode graphNodes[] = null;
 
+void resetNetwork() {
+  Point pt = new Point();
+  for(int i = 0; i < nodes.length; i++) {
+    nodes[i].nodePosition[0] = graphNodes[i].getLocation(pt).x;
+    nodes[i].nodePosition[1] = graphNodes[i].getLocation(pt).y;
+  }
+
+  if(dynamicLayout) {
+    dynamicLayout = false;
+  }  
+  clearNodeSelection();
+  evidence.resetEvidence();
+}
+
 void initNetwork() {
   net = loadNetwork("pubmedquery.net");
   evidence = net.getEvidenceController();
@@ -117,4 +131,5 @@ void rescaleNodes() {
   }
 
   updateP();
+  updateLayout();
 }
