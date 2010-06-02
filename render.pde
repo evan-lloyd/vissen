@@ -1,40 +1,3 @@
-void setupInterface() {
-  controlP5 = new ControlP5(this);
-  
-  ControlGroup g = controlP5.addGroup("infoTab", 5, height - 200, width - 10);
-  
-  controlP5.addButton("renderSettingsTab", 0, 5, 5, 100, 20).setGroup(g);
-  controlP5.controller("renderSettingsTab").setLabel("Render Settings");
-  controlP5.addButton("selectedTermsTab", 0, 110, 5, 100, 20).setGroup(g);
-  controlP5.controller("selectedTermsTab").setLabel("Selected Terms");
-  
-  controlP5.controller("selectedTermsTab").captionLabel().toUpperCase(false);
-  controlP5.controller("renderSettingsTab").captionLabel().toUpperCase(false);
-  controlP5.controller("renderSettingsTab").setMoveable(false);
-  controlP5.controller("selectedTermsTab").setMoveable(false);
-  
-  controlP5.addSlider("edgeThresh", edgeThreshMin, edgeThreshMax, edgeThresh, 5, 35, 200, 20).setGroup(g);
-  controlP5.controller("edgeThresh").setColorLabel(color(0.0));
-  controlP5.controller("edgeThresh").setMoveable(false);
-  controlP5.controller("edgeThresh").setLabel("Edge drawing threshold");
-  controlP5.controller("edgeThresh").captionLabel().toUpperCase(false);
-  
-  
-  controlP5.group("infoTab").captionLabel().toUpperCase(false);
-  controlP5.group("infoTab").setLabel("");
-  
-  g.setBackgroundColor(statusBackground);
-  g.setBackgroundHeight(195);
-  g.setBarHeight(20);
-  g.setMoveable(false);
-  g.setId(infoTab);
-  g.activateEvent(true);
-
-  controlP5.setControlFont(controlsSmall);
-  controlP5.setAutoDraw(false);
-  
-}
-
 void setColorsAndFonts() {
   colorMode(HSB, 1.0);
   nodeDefaultColor = color(0);
@@ -63,6 +26,30 @@ void drawInfoTab() {
   }
 }
 
+void drawEdges() { 
+  strokeWeight(6.0 * zoom);
+  for(int i = 0; i < nodes.length; i++) {
+    for(int j = 0; j < nodes.length; j++) {
+      if(i == j)
+        continue;
+      if(sens[i][j][1] > edgeThresh && showPositive) {
+        stroke(nodeTrueColor);
+        line(nodes[i].x(), nodes[i].y(), nodes[j].x(), nodes[j].y());
+      }
+      else if(sens[i][j][1] < -edgeThresh && showNegative) {
+        stroke(nodeFalseColor);
+        line(nodes[i].x(), nodes[i].y(), nodes[j].x(), nodes[j].y());
+      }
+    }
+  }
+}
+
+void drawNodes() { 
+  for(int i = nodes.length - 1; i >= 0; i--) {
+    nodes[i].draw();
+  }
+}
+
 void draw() {
   updateControls();
   
@@ -71,27 +58,10 @@ void draw() {
   
   background(bgColor);
   
-  if(drawEdges) {
-    strokeWeight(6.0 * zoom);
-    for(int i = 0; i < nodes.length; i++) {
-      for(int j = 0; j < nodes.length; j++) {
-        if(i == j)
-          continue;
-        if(sens[i][j][1] > edgeThresh) {
-          stroke(nodeTrueColor);
-          line(nodes[i].x(), nodes[i].y(), nodes[j].x(), nodes[j].y());
-        }
-        else if(sens[i][j][1] < -edgeThresh) {
-          stroke(nodeFalseColor);
-          line(nodes[i].x(), nodes[i].y(), nodes[j].x(), nodes[j].y());
-        }
-      }
-    }
-  }
+  if(drawEdges)
+    drawEdges();
   
-  for(int i = nodes.length - 1; i >= 0; i--) {
-    nodes[i].draw();
-  }
+  drawNodes();
   
   if(draggingSelection) { // draw selection box
       stroke(nodeDefaultColor);

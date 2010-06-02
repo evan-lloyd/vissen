@@ -1,6 +1,55 @@
 import java.awt.event.*;
 import java.util.*;
 
+void setupInterface() {
+  controlP5 = new ControlP5(this);
+  
+  infoTab = controlP5.addGroup("infoTab", 5, height - 200, width - 10);
+  
+  controlP5.addButton("renderSettingsTab", 0, 5, 5, 100, 20).setGroup(infoTab);
+  controlP5.controller("renderSettingsTab").setLabel("Render Settings");
+  controlP5.addButton("selectedTermsTab", 0, 110, 5, 100, 20).setGroup(infoTab);
+  controlP5.controller("selectedTermsTab").setLabel("Selected Terms");
+  
+  controlP5.controller("selectedTermsTab").captionLabel().toUpperCase(false);
+  controlP5.controller("renderSettingsTab").captionLabel().toUpperCase(false);
+  controlP5.controller("renderSettingsTab").setMoveable(false);
+  controlP5.controller("selectedTermsTab").setMoveable(false);
+  
+  controlP5.addSlider("edgeThresh", edgeThreshMin, edgeThreshMax, edgeThresh, 5, 35, 200, 20).setGroup(infoTab);
+  controlP5.controller("edgeThresh").setColorLabel(color(0.0));
+  controlP5.controller("edgeThresh").setMoveable(false);
+  controlP5.controller("edgeThresh").setLabel("Edge drawing threshold");
+  controlP5.controller("edgeThresh").captionLabel().toUpperCase(false);
+  
+  controlP5.addToggle("showPositive", showPositive, 5, 60, 20, 20).setGroup(infoTab);
+  controlP5.controller("showPositive").setColorLabel(color(0.0));
+  controlP5.controller("showPositive").setMoveable(false);
+  controlP5.controller("showPositive").captionLabel().toUpperCase(false);
+  controlP5.controller("showPositive").setLabel("Show positive connections");
+  
+  controlP5.addToggle("showNegative", showNegative, 5, 95, 20, 20).setGroup(infoTab);
+  controlP5.controller("showNegative").setColorLabel(color(0.0));
+  controlP5.controller("showNegative").setMoveable(false);
+  controlP5.controller("showNegative").captionLabel().toUpperCase(false);
+  controlP5.controller("showNegative").setLabel("Show negative connections");
+
+  
+  infoTab.captionLabel().toUpperCase(false);
+  infoTab.setLabel("");
+  
+  infoTab.setBackgroundColor(statusBackground);
+  infoTab.setBackgroundHeight(195);
+  infoTab.setBarHeight(20);
+  infoTab.setMoveable(false);
+//  infoTab.setId(infoTab);
+  infoTab.activateEvent(true);
+
+  controlP5.setControlFont(controlsSmall);
+  controlP5.setAutoDraw(false);
+  
+}
+
 public void updateControls() {
   if(panLeft)
     panX -= keyPanSpeed;
@@ -37,53 +86,55 @@ boolean boxIntersectsNode(int x1, int x2, int y1, int y2, int i) {
 }
 
 boolean currentlySelected(int i) {
-  if(selectedNodes == null)
-    return false;
+  return selectedNodes.contains(i);
+  //for(int j = 0; j < selectedNodes.size(); j++) {
+    //if(selectedNodes.get(j) == i)
+      //return true;
+  //}
+//  return false;
+}
+
+public void selectNode(int i, boolean s) {
+  if(i < 0)
+    return;
     
-  for(int j = 0; j < selectedNodes.length; j++) {
-    if(selectedNodes[j] == i)
-      return true;
+  if(s && !currentlySelected(i)) {
+    selectedNodes.add(i);
+    nodes[i].selected = true;
   }
-  return false;
+  else if(!s && currentlySelected(i)) {
+    selectedNodes.remove(new Integer(i));
+    nodes[i].selected = false;
+  }
+}
+
+public void toggleNodeSelection(int i) {
+  selectNode(i, !currentlySelected(i));
+}
+
+public void selectNode(int i) {
+  if(i < 0)
+    return;
+  if(!currentlySelected(i))
+    selectedNodes.add(i);
+  nodes[i].selected = true;
+}
+
+public void clearNodeSelection() {
+  selectedNodes.clear();
+  for(int i = 0; i < nodes.length; i++) {
+    nodes[i].selected = false;
+  }
 }
 
 public void doNodeClicked(int i) {
-  if(controlHeld)
-    nodes[i].selected = !nodes[i].selected;
-  else if(shiftHeld)
-    nodes[i].selected = true;
+  if(!controlHeld && !shiftHeld)
+    clearNodeSelection();
     
-  if(controlHeld || shiftHeld) {
-    if(nodes[i].selected) { // add to selection
-      if(currentlySelected(i)) // already in selectedNodes
-        return;
-      Integer [] temp = new Integer[selectedNodes.length + 1];
-      
-      if(selectedNodes != null)
-      for(int j = 0; j < selectedNodes.length; j++)
-        temp[j] = selectedNodes[j];
-      temp[selectedNodes.length] = i;
-      selectedNodes = temp;
-    }
-    else{ // remove from selection
-      Integer [] temp = new Integer[selectedNodes.length - 1];
-      int pos = 0;
-      
-      if(selectedNodes != null)
-      for(int j = 0; j < selectedNodes.length; j++) {
-        if(selectedNodes[j] != i)
-          temp[pos++] = selectedNodes[j];
-      }
-      selectedNodes = temp;
-    }
-  }
-  else if(!(nodes[i].selected && max(abs(mouseX - lxPress), abs(mouseY - lyPress)) > moveSelectThresh)){ // set as only selection
-    for(int j = 0; j < nodes.length; j++)
-      nodes[j].selected = false;
-    selectedNodes = new Integer[1];
-    selectedNodes[0] = i;
-    nodes[i].selected = true;
-  }
+  if(controlHeld)
+    toggleNodeSelection(i);
+  else
+    selectNode(i);
 }
 
 public void doSelectionBox() {
@@ -92,40 +143,19 @@ public void doSelectionBox() {
   int y1 = min(mouseY, lyPress);
   int y2 = max(mouseY, lyPress);
   
-  Vector nodesToSelect = null;
-  if(selectedNodes != null && (controlHeld || shiftHeld))
-    nodesToSelect = new Vector(Arrays.asList(selectedNodes));
-  else
-    nodesToSelect = new Vector();
+  if(!controlHeld && !shiftHeld)
+    clearNodeSelection();
   
   for(int i = 0; i < nodes.length; i++) {
     if(boxIntersectsNode(x1, x2, y1, y2, i)) {
-      if(shiftHeld && !currentlySelected(i))
-        nodesToSelect.add(i);
-      else if(controlHeld) {
-        if(currentlySelected(i))
-          nodesToSelect.remove(new Integer(i));
-        else
-          nodesToSelect.add(i);
-      }
-      else if(!shiftHeld)
-        nodesToSelect.add(i);
+      if(controlHeld)
+        toggleNodeSelection(i);
+      else
+        selectNode(i);
     }
     
-    nodes[i].selected = false;
   }
   
-  if(nodesToSelect.size() == 0)
-    selectedNodes = null;
-  else {
-    selectedNodes = new Integer[nodesToSelect.size()];
-    nodesToSelect.copyInto(selectedNodes);
-  }
-  
-  if(selectedNodes != null)
-  for(int i = 0; i < selectedNodes.length; i++) {
-    nodes[selectedNodes[i]].selected = true;
-  }
 }
 
 public void setupControls() {
@@ -163,6 +193,8 @@ void updateControlVisibility(int oldMode, int newMode) {
   switch (oldMode) {
     case renderSettingsInfo:
     controlP5.controller("edgeThresh").hide();
+    controlP5.controller("showNegative").hide();
+    controlP5.controller("showPositive").hide();
     break;
     case selectedTermsInfo:
     break;
@@ -170,6 +202,8 @@ void updateControlVisibility(int oldMode, int newMode) {
   switch (newMode) {
     case renderSettingsInfo:
     controlP5.controller("edgeThresh").show();
+    controlP5.controller("showNegative").show();
+    controlP5.controller("showPositive").show();
     break;
     case selectedTermsInfo:
     break;
@@ -189,13 +223,26 @@ void selectedTermsTab() {
 public void controlEvent(ControlEvent e) {
   draggingSelection = false;
   
-  if(e.isGroup()) { // info tab
-    infoTabVisible = !infoTabVisible;
-    if(infoTabVisible)
-      controlP5.getGroup("infoTab").setPosition(5, height - 200);
-    else
-      controlP5.getGroup("infoTab").setPosition(5, height - 4);
+  if(e.isGroup()) {
+    if(e.group() == infoTab) {
+      infoTabVisible = !infoTabVisible;
+      if(infoTabVisible)
+        infoTab.setPosition(5, height - 200);
+      else
+        infoTab.setPosition(5, height - 4);
+    }
   }
+}
+
+void dragSelectedNodes(float dx, float dy) {
+  if(dynamicLayout)
+    updateDragTargets(dx, dy);
+  else
+    for(int i = 0; i < selectedNodes.size(); i++) {
+      Node n = nodes[(Integer)selectedNodes.get(i)];
+      n.nodePosition[0] += dx;
+      n.nodePosition[1] += dy;
+    }
 }
 
 void mouseDragged() {
@@ -218,21 +265,17 @@ void mouseDragged() {
     //animateAssertion();
   }
   else if(nodeDragged != -1) { // drag node
-    if(selectedNodes != null) {
-      if(!nodes[nodeDragged].selected) {
-        doNodeClicked(nodeDragged);
+  
+      if(dragStarting) {
+        if(!nodes[nodeDragged].selected)
+          doNodeClicked(nodeDragged);
+        if(dynamicLayout)
+          startPhysicsDrag(selectedNodes);
+          
+        dragStarting = false;
       }
-      for(int i = 0; i < selectedNodes.length; i++) {
-        nodes[selectedNodes[i]].nodePosition[0] += dx / zoom;
-        nodes[selectedNodes[i]].nodePosition[1] += dy / zoom;
-      }
-    }
-    
-    
-    if(!nodes[nodeDragged].selected) {
-      nodes[nodeDragged].nodePosition[0] += dx / zoom;
-      nodes[nodeDragged].nodePosition[1] += dy / zoom;
-    }
+      
+      dragSelectedNodes(dx / zoom, dy / zoom);
   }
 
   prevMouseX = mouseX;
@@ -259,11 +302,13 @@ void mousePressed() {
     for(int i = 0; i < nodes.length; i++) {
       if(nodes[i].pointInBounds(screenToWorld(mouseX, mouseY))) {
         nodeDragged = i;
+        dragStarting = true;
         break;
       }
     }
     lxPress = mouseX;
     lyPress = mouseY;
+
     if(nodeDragged == -1 && !altHeld)
       draggingSelection = true;
     leftMBHeld = true;
@@ -290,12 +335,15 @@ void mousePressed() {
 void mouseReleased() {
   if(mouseButton == LEFT) { 
     leftMBHeld = false;
-    if(nodeDragged != -1)
+    if(dragStarting) // didn't actually drag
       doNodeClicked(nodeDragged);
     if(draggingSelection)
       doSelectionBox();
     draggingSelection = false;
     nodeDragged = -1;
+    
+    // don't check that we're in physics mode, since it *could* have been turned off since we started
+    endPhysicsDrag();
   }
   if(mouseButton == RIGHT) {
     rightMBHeld = false;
@@ -311,6 +359,9 @@ void mouseReleased() {
 
 void keyPressed() {
   switch(key) {
+    case 'n':
+    resetNetwork();
+    break;
     case 'e':
     drawEdges = !drawEdges;
     break;
