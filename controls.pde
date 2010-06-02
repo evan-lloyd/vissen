@@ -1,10 +1,12 @@
 import java.awt.event.*;
 import java.util.*;
 
+int infoTabHeight = 150;
+
 void setupInterface() {
   controlP5 = new ControlP5(this);
   
-  infoTab = controlP5.addGroup("infoTab", 5, height - 200, width - 10);
+  infoTab = controlP5.addGroup("infoTab", 5, height - infoTabHeight, width - 10);
   
   controlP5.addButton("renderSettingsTab", 0, 5, 5, 100, 20).setGroup(infoTab);
   controlP5.controller("renderSettingsTab").setLabel("Render Settings");
@@ -39,7 +41,7 @@ void setupInterface() {
   infoTab.setLabel("");
   
   infoTab.setBackgroundColor(statusBackground);
-  infoTab.setBackgroundHeight(195);
+  infoTab.setBackgroundHeight(infoTabHeight - 5);
   infoTab.setBarHeight(20);
   infoTab.setMoveable(false);
 //  infoTab.setId(infoTab);
@@ -61,18 +63,7 @@ public void updateControls() {
     panY += keyPanSpeed;
   
   if(zoomIn || zoomOut) {
-    float oldCenterX = panX + width / (2 * zoom);
-    float oldCenterY = panY + height / (2 * zoom);
-  
-    zoom *= (1.0 - 0.20 * (zoomIn ? -keyZoomSpeed : keyZoomSpeed));
-    //zoomFactor+=notches*-0.05;
-    if(zoom < 0.3)
-      zoom = 0.3;
-    if(zoom > 5.0)
-      zoom = 5.0;
-  
-    panX = oldCenterX - width / (2 * zoom);
-    panY = oldCenterY - height / (2 * zoom);
+    doZoom(zoomIn ? -keyZoomSpeed : keyZoomSpeed);
   }
 }
 
@@ -162,6 +153,22 @@ public void setupControls() {
   setupMouseWheel();
 }
 
+public void doZoom(float notches) {
+      //println(notches);
+    float oldCenterX = panX + width / (2 * zoom);
+    float oldCenterY = panY + height / (2 * zoom);
+
+    zoom *= (1.0 - 0.20 * notches);
+    //zoomFactor+=notches*-0.05;
+    if(zoom < minZoom)
+      zoom = minZoom;
+    if(zoom > maxZoom)
+      zoom = maxZoom;
+
+    panX = oldCenterX - width / (2 * zoom);
+    panY = oldCenterY - height / (2 * zoom);
+}
+
 public void setupMouseWheel() {
   // thanks to example code from Processing forums, by Guillaume LaBelle
   // http://ingallian.design.uqam.ca/goo/P55/ImageExplorer/
@@ -169,20 +176,7 @@ public void setupMouseWheel() {
     public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
       int notches = evt.getWheelRotation();
       if(notches!=0){
-        //println(notches);
-        float oldCenterX = panX + width / (2 * zoom);
-        float oldCenterY = panY + height / (2 * zoom);
-
-        zoom *= (1.0 - 0.20 * notches);
-        //zoomFactor+=notches*-0.05;
-        if(zoom < 0.3)
-          zoom = 0.3;
-        if(zoom > 5.0)
-          zoom = 5.0;
-
-        panX = oldCenterX - width / (2 * zoom);
-        panY = oldCenterY - height / (2 * zoom);
-
+        doZoom(notches);
       }
     }
   }
@@ -227,7 +221,7 @@ public void controlEvent(ControlEvent e) {
     if(e.group() == infoTab) {
       infoTabVisible = !infoTabVisible;
       if(infoTabVisible)
-        infoTab.setPosition(5, height - 200);
+        infoTab.setPosition(5, height - infoTabHeight);
       else
         infoTab.setPosition(5, height - 4);
     }
@@ -385,6 +379,7 @@ void keyPressed() {
     break;
     
     case '+':
+    case '=':
     zoomIn = true;
     break;
     case '-':
@@ -425,6 +420,7 @@ void keyReleased() {
     break;
     
     case '+':
+    case '=':
     zoomIn = false;
     break;
     case '-':

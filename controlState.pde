@@ -10,7 +10,11 @@ int prevMouseX, prevMouseY;
 boolean panUp = false, panDown = false, panLeft = false, panRight = false;
 boolean zoomIn = false, zoomOut = false;
 public float panX = 0, panY = 0;
+
 public float zoom = 1.0;
+public float minZoom = 0.3;
+public float maxZoom = 4.0;
+
 int keyPanSpeed = 20;
 float keyZoomSpeed = 0.5;
 

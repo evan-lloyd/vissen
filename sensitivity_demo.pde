@@ -4,7 +4,7 @@ import java.awt.*;
 double sens[][][];
 
 void setup() {
-  size(1000, 1000);
+  size(800, 800);
 
   initNetwork();
 
@@ -13,6 +13,10 @@ void setup() {
   setColorsAndFonts();
   setupControls();
   setupInterface();
+  
+  // cheap hack to center and size right for 800x800
+  doZoom(1);
+  panY += 100;
   
   initLayout();
 }
