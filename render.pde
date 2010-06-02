@@ -22,7 +22,7 @@ void drawInfoTab() {
     textFont(controlsLarge, 18);
     textSize(18);
     
-    text(statusString, 10, height - 200 + 55);
+    text(statusString, 10, height - infoTabHeight + 55);
   }
 }
 
