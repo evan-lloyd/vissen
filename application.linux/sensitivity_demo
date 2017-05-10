@@ -1,0 +1,4 @@
+#!/bin/sh
+
+APPDIR=$(dirname "$0")
+java  -Djava.library.path="$APPDIR" -cp "$APPDIR/lib/controlP5.jar:$APPDIR/lib/inflib.jar:$APPDIR/lib/physics.jar:$APPDIR/lib/sensitivity_demo.jar:$APPDIR/lib/core.jar" sensitivity_demo
