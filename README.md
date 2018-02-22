@@ -2,6 +2,10 @@
 
 Prototype of a tool for visualizing term co-occurrences in PubMed abstracts, written for the [UCLA CNP](http://www.phenomics.ucla.edu/). Uses [Processing 1.5 (Java)](https://processing.org) for graphical display, and the inference library from [SamIam](http://reasoning.cs.ucla.edu/samiam/), developed by UCLA's [Automated Reasoning Group](http://reasoning.cs.ucla.edu/). No longer under development.
 
+![vissen screenshot](./vissen_screenshot.JPG)
+
+Run the demo by opening "index.html" under the "applet" directory in a browser with the Java plugin enabled, or by launching "sensitivity_demo.jar" directly from the console.
+
 ## Controls
 * w, s, a, d: Pan up, down, left, or right
 * +/-: Zoom in/out
