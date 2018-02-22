@@ -1,6 +1,6 @@
 # vissen
 
-Prototype of a tool for visualizing term co-occurrences in PubMed abstracts, written for the [UCLA CNP](http://www.phenomics.ucla.edu/). Uses [Processing 1.5 (Java)](https://processing.org) for graphical display, and the inference library from [SamIam](http://reasoning.cs.ucla.edu/samiam/), developed by UCLA's [Automated Reasoning Group](http://reasoning.cs.ucla.edu/). No longer under development.
+Prototype of a tool for visualizing term co-occurrences in PubMed abstracts, written for the [UCLA CNP](http://www.phenomics.ucla.edu/). Uses [Processing 1.5 (Java)](https://processing.org) for graphical display, and the inference library from [SamIam](http://reasoning.cs.ucla.edu/samiam/).
 
 ![vissen screenshot](./vissen_screenshot.JPG)
 
